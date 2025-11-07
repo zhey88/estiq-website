@@ -390,9 +390,14 @@ h1, h2, h3 {
 }
 
 .eyebrow-gallery {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 600px;
+    display: flex;
+    justify-content: center;
+    max-width: 400px;
     margin: 0 auto;
+}
+
+.eyebrow-gallery .gallery-item {
+    max-width: 300px;
 }
 
 .facial-gallery {
