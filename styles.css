@@ -55,6 +55,15 @@ h1, h2, h3 {
     letter-spacing: 1px;
 }
 
+.nav-address {
+    font-size: 0.75rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #666;
+    margin-top: 0.25rem;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
 .brand-esti {
     font-family: 'Century Gothic', sans-serif;
 }
@@ -70,6 +79,11 @@ h1, h2, h3 {
     display: flex;
     list-style: none;
     gap: 2rem;
+    align-items: center;
+}
+
+.nav-menu li {
+    position: relative;
 }
 
 .nav-menu a {
@@ -83,6 +97,65 @@ h1, h2, h3 {
 
 .nav-menu a:hover {
     color: var(--primary-color);
+}
+
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown .dropbtn {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.arrow-down {
+    font-size: 0.7rem;
+    margin-left: 0.3rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.dropdown:hover .arrow-down {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--white);
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    z-index: 1001;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--light-bg);
+    color: var(--primary-color);
+    padding-left: 2rem;
+}
+
+.dropdown-content a.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 
 .hamburger {
@@ -596,10 +669,49 @@ h1, h2, h3 {
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0,0,0,0.05);
         padding: 2rem 0;
+        align-items: stretch;
     }
 
     .nav-menu.active {
         left: 0;
+    }
+
+    /* Mobile Dropdown Styles */
+    .dropdown {
+        width: 100%;
+    }
+
+    .dropdown .dropbtn {
+        display: block;
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .dropdown-content {
+        position: static;
+        display: none;
+        box-shadow: none;
+        background-color: var(--light-bg);
+        margin: 0;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .dropdown-content a {
+        padding: 0.8rem 2rem;
+        font-size: 0.85rem;
+    }
+
+    .dropdown-content a:hover {
+        padding-left: 2.5rem;
+    }
+
+    .dropdown.active .dropdown-content {
+        display: block;
+    }
+
+    .dropdown.active .arrow-down {
+        transform: rotate(180deg);
     }
 
     .hero-title {
@@ -663,5 +775,202 @@ h1, h2, h3 {
     .facial-gallery,
     .headspa-gallery {
         grid-template-columns: 1fr;
+    }
+}
+/* Service Page Specific Styles */
+.service-hero {
+    min-height: 50vh;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+    position: relative;
+}
+
+.service-hero .hero-overlay {
+    width: 100%;
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.service-hero .hero-title {
+    font-size: 3.5rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.service-hero .hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--white);
+    opacity: 0.9;
+}
+
+.service-details {
+    padding: 5rem 0;
+    background: var(--white);
+}
+
+.service-content {
+    display: grid;
+    gap: 3rem;
+}
+
+.service-image-main {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.service-image-main img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.service-description h2 {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+
+.service-description h3 {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    margin: 2rem 0 1rem;
+}
+
+.service-description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+.service-list,
+.benefits-list,
+.care-tips {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.service-list li,
+.benefits-list li,
+.care-tips li {
+    padding: 0.8rem 0;
+    padding-left: 2rem;
+    position: relative;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.service-list li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.benefits-list li {
+    padding-left: 0;
+}
+
+.care-tips li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.cta-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #d4a574 100%);
+    padding: 3rem;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.cta-section h3 {
+    color: var(--white);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--white);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.related-services {
+    padding: 5rem 0;
+    background: var(--light-bg);
+}
+
+.related-services .services-grid {
+    margin-top: 3rem;
+}
+
+.related-services .service-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.related-services .service-card:hover {
+    transform: translateY(-10px);
+}
+
+.nav-menu a.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .service-hero .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .service-hero .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .service-description h2 {
+        font-size: 2rem;
+    }
+
+    .service-description h3 {
+        font-size: 1.5rem;
+    }
+
+    .cta-section {
+        padding: 2rem;
+    }
+
+    .cta-section h3 {
+        font-size: 1.6rem;
     }
 }

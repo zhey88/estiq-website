@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>estiq - Professional Nail Services</title>
+    <meta name="description" content="Estiq is a beauty salon in Joo Chiat, Singapore offering professional facials, nail services, manicure, pedicure, eyelash extensions, and scalp deep cleaning. Visit us at 166 Joo Chiat Road, Singapore 427439.">
+    <meta name="keywords" content="beauty salon Joo Chiat, nail services Singapore, eyelash extensions, facials, scalp treatment, manicure pedicure, estiq beauty salon">
+    <title>Estiq Beauty Salon | Facials, Nail Services, Eyelash Extensions | Joo Chiat Singapore</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17708378003"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-17708378003');
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -15,11 +27,20 @@
         <div class="container">
             <div class="nav-brand">
                 <span class="brand-esti">esti</span><span class="brand-q">q</span>
+                <div class="nav-address">166 Joo Chiat Road, Singapore 427439</div>
             </div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Us</a></li>
-                <li><a href="#services">Services</a></li>
+                <li class="dropdown">
+                    <a href="#services" class="dropbtn">Services <span class="arrow-down">▼</span></a>
+                    <div class="dropdown-content">
+                        <a href="facial.html">Facial</a>
+                        <a href="nail.html">Nails</a>
+                        <a href="lash.html">Lashes</a>
+                        <a href="scalp.html">Scalp Care</a>
+                    </div>
+                </li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#locations">Locations</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -53,6 +74,8 @@
                 </div>
                 <div class="about-text">
                     <h2><span class="brand-esti">esti</span><span class="brand-q">q</span></h2>
+                    <p><strong>Estiq is a beauty salon in Joo Chiat offering facials, nail services, eyelash extensions, and scalp deep cleaning.</strong></p>
+                    
                     <p>Welcome to estiq, your one-stop destination for beauty and wellness. Our team of highly skilled and experienced beauty specialists is passionate about helping you look and feel your absolute best.</p>
                     
                     <p>Our studio is a cozy and inviting space that's designed to provide a relaxing and comfortable atmosphere for our clients. We use the latest equipment and high-quality products to ensure exceptional results every time.</p>
@@ -73,31 +96,37 @@
             <h2 class="section-title">OUR SERVICES</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-number">01 /</div>
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=600&fit=crop" alt="Manicure & Pedicure">
-                    </div>
-                    <h3>Mani</h3>
-                    <h3>Pedi</h3>
-                    <p>Professional manicure and pedicure services to keep your hands and feet looking beautiful.</p>
+                    <a href="nail.html" style="text-decoration: none; color: inherit;">
+                        <div class="service-number">01 /</div>
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=600&fit=crop" alt="Manicure & Pedicure">
+                        </div>
+                        <h3>Mani</h3>
+                        <h3>Pedi</h3>
+                        <p>Professional manicure and pedicure services to keep your hands and feet looking beautiful.</p>
+                    </a>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-number">02 /</div>
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=600&h=600&fit=crop" alt="Nail Art & Spa">
-                    </div>
-                    <h3>Nail Art & Spa</h3>
-                    <p>Custom nail art designs and luxurious spa treatments for your nails with premium products.</p>
+                    <a href="nail.html" style="text-decoration: none; color: inherit;">
+                        <div class="service-number">02 /</div>
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1610992015732-2449b76344bc?w=600&h=600&fit=crop" alt="Nail Art & Spa">
+                        </div>
+                        <h3>Nail Art & Spa</h3>
+                        <p>Custom nail art designs and luxurious spa treatments for your nails with premium products.</p>
+                    </a>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-number">03 /</div>
-                    <div class="service-image">
-                        <img src="https://i.postimg.cc/y65Hy81b/Eyelesh1.jpg" alt="Eyelash Extensions">
-                    </div>
-                    <h3>Eyelash</h3>
-                    <p>Beautiful eyelash extensions and lifts to enhance your natural beauty and brighten your eyes.</p>
+                    <a href="lash.html" style="text-decoration: none; color: inherit;">
+                        <div class="service-number">03 /</div>
+                        <div class="service-image">
+                            <img src="https://i.postimg.cc/y65Hy81b/Eyelesh1.jpg" alt="Eyelash Extensions">
+                        </div>
+                        <h3>Eyelash</h3>
+                        <p>Beautiful eyelash extensions and lifts to enhance your natural beauty and brighten your eyes.</p>
+                    </a>
                 </div>
 
                 <div class="service-card">
@@ -110,20 +139,23 @@
                 </div>
 
                 <div class="service-card">
-                    <div class="service-number">05 /</div>
-                    <div class="service-image">
-                        <img src="https://i.postimg.cc/htPyhN6y/Headspa1.jpg" alt="Head Spa">
-                    </div>
-                    <h3>Head Spa</h3>
-                    <p>Rejuvenating head spa treatments to relieve stress, promote hair health and ultimate relaxation.</p>
+                    <a href="scalp.html" style="text-decoration: none; color: inherit;">
+                        <div class="service-number">05 /</div>
+                        <div class="service-image">
+                            <img src="https://i.postimg.cc/htPyhN6y/Headspa1.jpg" alt="Head Spa">
+                        </div>
+                        <h3>Head Spa</h3>
+                        <p>Rejuvenating head spa treatments to relieve stress, promote hair health and ultimate relaxation.</p>
+                    </a>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-number">06 /</div>
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=600&fit=crop&q=80" alt="Facial Treatments">
-                    </div>
-                    <h3>Facial</h3>
+                    <a href="facial.html" style="text-decoration: none; color: inherit;">
+                        <div class="service-number">06 /</div>
+                        <div class="service-image">
+                            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&h=600&fit=crop&q=80" alt="Facial Treatments">
+                        </div>
+                        <h3>Facial</h3>
                     <p>Professional facial treatments to cleanse, rejuvenate and maintain healthy, glowing skin.</p>
                 </div>
             </div>
@@ -220,6 +252,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
+                    <p>166 Joo Chiat Road, Singapore 427439</p>
                     <p>Contact Number: <a href="tel:+6588408188">88408188</a></p>
                 </div>
                 <div class="footer-bottom">
