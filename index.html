@@ -6,7 +6,7 @@
     <meta name="description" content="Estiq is a beauty salon in Joo Chiat, Singapore offering professional facials, nail services, manicure, pedicure, eyelash extensions, and scalp deep cleaning. Visit us at 166 Joo Chiat Road, Singapore 427439.">
     <meta name="keywords" content="beauty salon Joo Chiat, nail services Singapore, eyelash extensions, facials, scalp treatment, manicure pedicure, estiq beauty salon">
     <title>Estiq Beauty Salon | Facials, Nail Services, Eyelash Extensions | Joo Chiat Singapore</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
@@ -43,13 +43,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <li class="dropdown">
                     <a href="#services" class="dropbtn">Services <span class="arrow-down">▼</span></a>
                     <div class="dropdown-content">
+                        <a href="nail.html">Mani & Pedi</a>
+                        <a href="nail.html">Nail Art & Spa</a>
+                        <a href="lash.html">Eyelash</a>
+                        <a href="#services">Hair Removal</a>
+                        <a href="scalp.html">Head Spa</a>
                         <a href="facial.html">Facial</a>
-                        <a href="nail.html">Nails</a>
-                        <a href="lash.html">Lashes</a>
-                        <a href="scalp.html">Scalp Care</a>
                     </div>
                 </li>
                 <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#price-list">Price List</a></li>
                 <li><a href="#locations">Locations</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -228,6 +231,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
     </section>
 
+    <!-- Price List Section -->
+    <section class="price-list" id="price-list">
+        <div class="container">
+            <h2 class="section-title">PRICE LIST</h2>
+            <p class="price-list-subtitle">Tap any image to enlarge</p>
+            <div class="price-list-grid">
+                <div class="price-list-item">
+                    <img src="https://i.postimg.cc/PJMTP9HK/1.png" alt="Price List 1" loading="lazy">
+                </div>
+                <div class="price-list-item">
+                    <img src="https://i.postimg.cc/VvFmdpwx/2.png" alt="Price List 2" loading="lazy">
+                </div>
+                <div class="price-list-item">
+                    <img src="https://i.postimg.cc/2yxrVMmR/3.png" alt="Price List 3" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Locations Section -->
     <section class="locations" id="locations">
         <div class="container">
@@ -250,8 +272,60 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-cta">
-                <h2>PLEASE WHATSAPP <a href="https://wa.me/6588408188">88408188</a> FOR THE EARLIEST APPOINTMENT</h2>
+                <h2>BOOK YOUR APPOINTMENT</h2>
+                <p class="booking-helper">Optional: fill in the form below and your message will be auto-filled in WhatsApp when you tap the button.</p>
             </div>
+
+            <form class="booking-form" id="bookingForm" novalidate>
+                <h3 class="booking-form-title">Quick Booking Form <span class="booking-form-optional">(optional)</span></h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookingName">Your Name</label>
+                        <input type="text" id="bookingName" name="name" placeholder="e.g. Jane Tan" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingPhone">Phone Number</label>
+                        <input type="tel" id="bookingPhone" name="phone" placeholder="e.g. 91234567" autocomplete="tel">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Services You're Interested In <span class="label-hint">(tap to select one or more)</span></label>
+                    <div class="service-chips" id="serviceChips">
+                        <button type="button" class="chip" data-service="Mani">Mani</button>
+                        <button type="button" class="chip" data-service="Pedi">Pedi</button>
+                        <button type="button" class="chip" data-service="Facial">Facial</button>
+                        <button type="button" class="chip" data-service="Eyelash">Eyelash</button>
+                        <button type="button" class="chip" data-service="Hair Removal">Hair Removal</button>
+                        <button type="button" class="chip" data-service="Head Spa">Head Spa</button>
+                        <button type="button" class="chip" data-service="Nail Art & Spa">Nail Art & Spa</button>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookingDate">Preferred Date</label>
+                        <input type="date" id="bookingDate" name="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingTime">Preferred Time</label>
+                        <select id="bookingTime" name="time" class="time-select">
+                            <option value="" disabled selected>Select a time</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="https://api.whatsapp.com/send?phone=6588408188" class="cta-button booking-submit" id="bookingWhatsapp" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" style="vertical-align:-4px;margin-right:8px;">
+                            <path d="M20.52 3.48A11.86 11.86 0 0 0 12.07 0C5.5 0 .14 5.36.14 11.93c0 2.1.55 4.15 1.6 5.96L0 24l6.27-1.65a11.93 11.93 0 0 0 5.8 1.48h.01c6.57 0 11.93-5.36 11.93-11.93 0-3.19-1.24-6.18-3.49-8.42zM12.07 21.6h-.01a9.6 9.6 0 0 1-4.9-1.34l-.35-.21-3.72.98 1-3.63-.23-.37a9.62 9.62 0 1 1 17.83-5.1c0 5.31-4.32 9.67-9.62 9.67zm5.3-7.23c-.29-.14-1.72-.85-1.98-.95-.27-.1-.46-.14-.66.14-.2.29-.76.95-.93 1.14-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.33-1.43-.86-.77-1.44-1.71-1.61-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.51.14-.17.19-.29.29-.48.1-.2.05-.36-.02-.51-.07-.14-.66-1.59-.91-2.18-.24-.57-.48-.5-.66-.5h-.57c-.2 0-.51.07-.78.36-.27.29-1.03 1-1.03 2.45s1.05 2.84 1.2 3.04c.14.2 2.07 3.16 5.02 4.43.7.3 1.25.48 1.68.62.7.22 1.34.19 1.85.12.56-.08 1.72-.7 1.97-1.39.24-.69.24-1.27.17-1.39-.07-.12-.27-.2-.56-.34z"/>
+                        </svg>
+                        Send via WhatsApp
+                    </a>
+                    <p class="form-note" id="formNote">Your message will be auto-filled in WhatsApp.</p>
+                </div>
+            </form>
         </div>
     </section>
 
@@ -277,6 +351,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </a>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=4"></script>
 </body>
 </html>

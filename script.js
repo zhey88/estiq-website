@@ -93,8 +93,8 @@ document.querySelectorAll('section, .service-card, .location-card, .gallery-item
     observer.observe(el);
 });
 
-// Gallery lightbox effect (simple version)
-document.querySelectorAll('.gallery-item img').forEach(img => {
+// Gallery lightbox effect (simple version) — also applies to price list images
+document.querySelectorAll('.gallery-item img, .price-list-item img').forEach(img => {
     img.addEventListener('click', function() {
         const lightbox = document.createElement('div');
         lightbox.style.cssText = `
@@ -165,6 +165,136 @@ function animateValue(element, start, end, duration) {
     };
     window.requestAnimationFrame(step);
 }
+
+// Booking form -> WhatsApp prefilled message
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('bookingForm');
+    if (!form) return;
+
+    const PHONE = '6588408188';
+    const WHATSAPP_BASE = `https://api.whatsapp.com/send?phone=${PHONE}`;
+
+    const nameInput = document.getElementById('bookingName');
+    const phoneInput = document.getElementById('bookingPhone');
+    const dateInput = document.getElementById('bookingDate');
+    const timeInput = document.getElementById('bookingTime');
+    const chipsContainer = document.getElementById('serviceChips');
+    const chips = chipsContainer ? chipsContainer.querySelectorAll('.chip') : [];
+
+    const headerLink = document.getElementById('whatsappLink');
+    const submitLink = document.getElementById('bookingWhatsapp');
+    const floatLink = document.querySelector('.whatsapp-float a');
+
+    // Toggle chip selection
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            chip.classList.toggle('selected');
+            refreshLinks();
+        });
+    });
+
+    // Date min = today
+    if (dateInput) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        dateInput.min = `${yyyy}-${mm}-${dd}`;
+    }
+
+    // Populate time dropdown with 30-min slots within salon hours (10:00 - 21:00)
+    if (timeInput && timeInput.tagName === 'SELECT') {
+        const startHour = 10; // 10 AM
+        const endHour = 21;   // 9 PM (last slot 21:00)
+        for (let h = startHour; h <= endHour; h++) {
+            for (const m of [0, 30]) {
+                if (h === endHour && m > 0) break; // stop at 21:00
+                const value = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+                const suffix = h >= 12 ? 'PM' : 'AM';
+                const hr12 = h % 12 || 12;
+                const label = `${hr12}:${String(m).padStart(2, '0')} ${suffix}`;
+                const opt = document.createElement('option');
+                opt.value = value;
+                opt.textContent = label;
+                timeInput.appendChild(opt);
+            }
+        }
+    }
+
+    const formatDate = (iso) => {
+        if (!iso) return '';
+        const [y, m, d] = iso.split('-');
+        const date = new Date(Number(y), Number(m) - 1, Number(d));
+        return date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+    };
+
+    const formatTime = (t) => {
+        if (!t) return '';
+        const [hStr, mStr] = t.split(':');
+        let h = Number(hStr);
+        const suffix = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        return `${h}:${mStr} ${suffix}`;
+    };
+
+    const getSelectedServices = () =>
+        Array.from(chips).filter(c => c.classList.contains('selected')).map(c => c.dataset.service);
+
+    const buildMessage = () => {
+        const name = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const services = getSelectedServices();
+        const date = formatDate(dateInput.value);
+        const time = formatTime(timeInput.value);
+
+        if (!name && !phone && services.length === 0 && !date && !time) return '';
+
+        const lines = ['Hi estiq, I would like to make a booking.', ''];
+        if (name) lines.push(`Name: ${name}`);
+        if (phone) lines.push(`Phone: ${phone}`);
+        if (services.length) lines.push(`Services: ${services.join(', ')}`);
+        if (date || time) {
+            lines.push(`Preferred Date/Time: ${[date, time].filter(Boolean).join(' at ')}`);
+        }
+        lines.push('', 'Thank you!');
+        return lines.join('\n');
+    };
+
+    const buildUrl = () => {
+        const message = buildMessage();
+        return message ? `${WHATSAPP_BASE}&text=${encodeURIComponent(message)}` : WHATSAPP_BASE;
+    };
+
+    const refreshLinks = () => {
+        const url = buildUrl();
+        if (headerLink) headerLink.href = url;
+        if (submitLink) submitLink.href = url;
+        if (floatLink) floatLink.href = url;
+    };
+
+    // Refresh on any form change/input
+    form.addEventListener('input', refreshLinks);
+    form.addEventListener('change', refreshLinks);
+
+    // Guarantee freshest URL on click (in case of race conditions)
+    [headerLink, submitLink, floatLink].forEach(link => {
+        if (!link) return;
+        link.addEventListener('click', (e) => {
+            const url = buildUrl();
+            link.href = url;
+            // Let the browser handle target="_blank" naturally
+        });
+    });
+
+    // Prevent accidental form submission (Enter key) — open WhatsApp instead
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        window.open(buildUrl(), '_blank', 'noopener');
+    });
+
+    // Initial state
+    refreshLinks();
+});
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
