@@ -6,7 +6,7 @@
     <meta name="description" content="Estiq is a beauty salon in Joo Chiat, Singapore offering professional facials, nail services, manicure, pedicure, eyelash extensions, and scalp deep cleaning. Visit us at 166 Joo Chiat Road, Singapore 427439.">
     <meta name="keywords" content="beauty salon Joo Chiat, nail services Singapore, eyelash extensions, facials, scalp treatment, manicure pedicure, estiq beauty salon">
     <title>Estiq Beauty Salon | Facials, Nail Services, Eyelash Extensions | Joo Chiat Singapore</title>
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=7">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
@@ -19,6 +19,56 @@
       gtag('js', new Date());
 
       gtag('config', 'AW-17708378003');
+    </script>
+
+    <!-- Structured Data: LocalBusiness + AggregateRating + Reviews -->
+    <!-- This JSON-LD helps Google, Bing, and AI-powered search assistants (e.g. "beauty shops near me with good ratings")
+         understand that estiq is a highly-rated local business, making it more likely to be recommended in AI/voice search answers. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BeautySalon",
+      "name": "estiq@Joo Chiat",
+      "image": "https://i.postimg.cc/s2f4TSsq/Shop.jpg",
+      "url": "https://www.estiq.sg/",
+      "telephone": "+6588408188",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "166 Joo Chiat Road",
+        "addressLocality": "Singapore",
+        "postalCode": "427439",
+        "addressCountry": "SG"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          "opens": "10:00",
+          "closes": "21:00"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "112",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Nadz Gloria" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "reviewBody": "I had such a wonderful experience with Tracy. She is very warm, kind, and patient, and she made me feel comfortable from start to finish. She listened carefully to what I wanted and paid great attention to detail. The service was relaxing.",
+          "datePublished": "2026-01-17"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/estiq_sg/",
+        "https://www.facebook.com/Eatiqsg"
+      ]
+    }
     </script>
 
     <!-- Google Tag Manager -->
@@ -71,6 +121,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div class="hero-content">
                     <h1 class="hero-title">Welcome.</h1>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <!-- Live Google reviews powered by Trustindex — connected to the estiq@Joo Chiat
+         Google Business Profile. Trustindex automatically keeps the rating, review
+         count, and displayed reviews in sync with Google (no backend required). -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="reviews-header">
+                <h2 class="reviews-title">How Our Customers Have Rated Us</h2>
+
+                <!-- Trustindex widget: connected live to the estiq@Joo Chiat Google Business Profile.
+                     Automatically renders the rating summary and 4-5 star reviews, and stays in
+                     sync with Google — no further code changes needed when new reviews come in. -->
+                <script defer async src='https://cdn.trustindex.io/loader.js?91b3a97764d597964576342cdc4'></script>
             </div>
         </div>
     </section>
@@ -351,6 +418,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </a>
     </div>
 
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=7"></script>
 </body>
 </html>

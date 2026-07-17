@@ -300,3 +300,47 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('The Nail Artistry website loaded successfully!');
 });
+
+// ---------------------------------------------------------------------------
+// GOOGLE_PLACES_CONFIG — optional real-time Google rating integration
+// ---------------------------------------------------------------------------
+// NOTE: The recommended way to show live Google reviews WITHOUT any backend
+// is the Trustindex widget embed added directly in index.html (see the
+// "LIVE GOOGLE REVIEWS" comment block above the <section class="reviews">).
+// Trustindex handles the Google connection entirely on their end — you just
+// paste a <script> + <div> snippet, no code here required.
+//
+// The config below is an ALTERNATIVE approach only if you later set up your
+// own backend (e.g. a Cloudflare Worker or Vercel function) to call the
+// Google Places API directly. It does nothing unless `enabled` is set to
+// true and a real `endpoint` is provided — safe to leave as is.
+const GOOGLE_PLACES_CONFIG = {
+    enabled: false, // set to true once your backend endpoint is ready
+    endpoint: '' // e.g. 'https://your-backend.example.com/api/estiq-reviews'
+};
+
+async function loadLiveGoogleRating() {
+    if (!GOOGLE_PLACES_CONFIG.enabled || !GOOGLE_PLACES_CONFIG.endpoint) return;
+
+    try {
+        const res = await fetch(GOOGLE_PLACES_CONFIG.endpoint);
+        if (!res.ok) throw new Error('Failed to fetch live rating');
+        const data = await res.json();
+
+        const ratingEl = document.getElementById('reviewsRatingNumber');
+        const countEl = document.getElementById('reviewsCount');
+
+        if (ratingEl && typeof data.rating === 'number') {
+            ratingEl.textContent = data.rating.toFixed(1);
+        }
+        if (countEl && typeof data.user_ratings_total === 'number') {
+            countEl.textContent = `${data.user_ratings_total} reviews`;
+        }
+        // data.reviews (if provided by your backend, filtered to 4-5 stars)
+        // could be used here to rebuild the .reviews-track cards dynamically.
+    } catch (err) {
+        console.warn('Could not load live Google rating, showing static values instead.', err);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadLiveGoogleRating);
