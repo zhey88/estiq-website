@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://enchanting-shortbread-dd6e11.netlify.app/sitemap.xml
