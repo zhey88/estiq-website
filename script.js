@@ -302,45 +302,131 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ---------------------------------------------------------------------------
-// GOOGLE_PLACES_CONFIG — optional real-time Google rating integration
+// GOOGLE PLACES SETUP — live Google Reviews, no backend required
 // ---------------------------------------------------------------------------
-// NOTE: The recommended way to show live Google reviews WITHOUT any backend
-// is the Trustindex widget embed added directly in index.html (see the
-// "LIVE GOOGLE REVIEWS" comment block above the <section class="reviews">).
-// Trustindex handles the Google connection entirely on their end — you just
-// paste a <script> + <div> snippet, no code here required.
+// This section fetches your REAL, LIVE rating + reviews directly from Google
+// using the Google Maps JavaScript API (Places library) in the browser. No
+// server/backend is needed — Google's Places library is designed to be used
+// client-side, as long as your API key is restricted to your website's domain
+// (see step 3 below), which prevents anyone else from misusing your key.
 //
-// The config below is an ALTERNATIVE approach only if you later set up your
-// own backend (e.g. a Cloudflare Worker or Vercel function) to call the
-// Google Places API directly. It does nothing unless `enabled` is set to
-// true and a real `endpoint` is provided — safe to leave as is.
-const GOOGLE_PLACES_CONFIG = {
-    enabled: false, // set to true once your backend endpoint is ready
-    endpoint: '' // e.g. 'https://your-backend.example.com/api/estiq-reviews'
-};
+// SETUP (one-time, ~10 minutes):
+// 1. Go to https://console.cloud.google.com/ and create a project (or use an
+//    existing one). Enable the "Places API" and "Maps JavaScript API".
+// 2. Create an API key under "APIs & Services" → "Credentials".
+// 3. IMPORTANT — restrict the key: edit the key → "Application restrictions"
+//    → "Websites" → add your domain(s), e.g. https://www.estiq.sg/* and
+//    http://localhost:8080/* (for local testing). This stops the key from
+//    being usable on any other site, even though it's visible in your HTML.
+// 4. Find your Google Place ID for "estiq@Joo Chiat" using this tool:
+//    https://developers.google.com/maps/documentation/places/web-service/place-id
+// 5. In index.html, replace YOUR_GOOGLE_MAPS_API_KEY in the <script src=
+//    "https://maps.googleapis.com/maps/api/js?key=..."> tag with your real key.
+// 6. Replace PLACE_ID below with your real Place ID.
+//
+// Once set up, the rating, review count, and 4-5 star reviews will load live
+// from Google on every page visit — no hardcoding, no manual updates, and no
+// backend/server needed. Google's free tier includes $200/month credit,
+// which comfortably covers a typical small-business website's traffic.
+const PLACE_ID = 'ChIJ-XJOzq4Z2jERhIg461zkErM';
 
-async function loadLiveGoogleRating() {
-    if (!GOOGLE_PLACES_CONFIG.enabled || !GOOGLE_PLACES_CONFIG.endpoint) return;
+// Called automatically by the Google Maps script tag in index.html once loaded.
+function initGoogleReviews() {
+    const trackEl = document.getElementById('reviewsTrack');
+    const fallbackMsg = document.getElementById('reviewsFallbackMsg');
 
-    try {
-        const res = await fetch(GOOGLE_PLACES_CONFIG.endpoint);
-        if (!res.ok) throw new Error('Failed to fetch live rating');
-        const data = await res.json();
+    if (!trackEl) return; // reviews section not present on this page
 
-        const ratingEl = document.getElementById('reviewsRatingNumber');
-        const countEl = document.getElementById('reviewsCount');
-
-        if (ratingEl && typeof data.rating === 'number') {
-            ratingEl.textContent = data.rating.toFixed(1);
-        }
-        if (countEl && typeof data.user_ratings_total === 'number') {
-            countEl.textContent = `${data.user_ratings_total} reviews`;
-        }
-        // data.reviews (if provided by your backend, filtered to 4-5 stars)
-        // could be used here to rebuild the .reviews-track cards dynamically.
-    } catch (err) {
-        console.warn('Could not load live Google rating, showing static values instead.', err);
+    if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
+        if (fallbackMsg) fallbackMsg.textContent = 'Live reviews are temporarily unavailable.';
+        return;
     }
+
+    if (!PLACE_ID || PLACE_ID === 'YOUR_GOOGLE_PLACE_ID') {
+        if (fallbackMsg) {
+            fallbackMsg.innerHTML = 'Live Google reviews will appear here once configured. <a href="https://www.google.com/search?q=estiq@Joo+Chiat+Reviews" target="_blank" rel="noopener">See our reviews on Google →</a>';
+        }
+        return;
+    }
+
+    // PlacesService requires a map or HTML element as context (never rendered visibly).
+    const dummyDiv = document.createElement('div');
+    const service = new google.maps.places.PlacesService(dummyDiv);
+
+    service.getDetails(
+        {
+            placeId: PLACE_ID,
+            fields: ['rating', 'user_ratings_total', 'reviews']
+        },
+        (place, status) => {
+            if (status !== google.maps.places.PlacesServiceStatus.OK || !place) {
+                if (fallbackMsg) fallbackMsg.textContent = 'Could not load live reviews right now — please check back later.';
+                return;
+            }
+            renderGoogleReviews(place);
+        }
+    );
 }
 
-document.addEventListener('DOMContentLoaded', loadLiveGoogleRating);
+function renderGoogleReviews(place) {
+    const ratingEl = document.getElementById('reviewsRatingNumber');
+    const countEl = document.getElementById('reviewsCount');
+    const trackEl = document.getElementById('reviewsTrack');
+
+    if (ratingEl && typeof place.rating === 'number') {
+        ratingEl.textContent = place.rating.toFixed(1);
+    }
+    if (countEl && typeof place.user_ratings_total === 'number') {
+        countEl.textContent = `${place.user_ratings_total} reviews`;
+    }
+
+    if (!trackEl) return;
+    trackEl.innerHTML = '';
+
+    // Only show 4 and 5 star reviews, matching the site's "best reviews" design intent.
+    const goodReviews = (place.reviews || []).filter(r => r.rating >= 4);
+
+    if (goodReviews.length === 0) {
+        trackEl.innerHTML = '<p class="reviews-note">No reviews to display yet.</p>';
+        return;
+    }
+
+    const buildCard = (review) => {
+        const card = document.createElement('div');
+        card.className = 'review-card';
+
+        const initials = (review.author_name || '?')
+            .split(' ')
+            .map(w => w[0])
+            .join('')
+            .slice(0, 2)
+            .toUpperCase();
+
+        const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+
+        card.innerHTML = `
+            <div class="review-card-header">
+                <div class="review-avatar">${initials}</div>
+                <div>
+                    <div class="review-author">${review.author_name || 'Google User'}</div>
+                    <div class="review-date">${review.relative_time_description || ''}</div>
+                </div>
+                <svg class="review-google-icon" width="18" height="18" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+            </div>
+            <div class="review-stars">${stars}</div>
+            <p class="review-text">${(review.text || '').slice(0, 220)}${(review.text || '').length > 220 ? '…' : ''}</p>
+        `;
+        return card;
+    };
+
+    // Render the reviews, then duplicate the set once so the CSS marquee scroll loops seamlessly.
+    goodReviews.forEach(r => trackEl.appendChild(buildCard(r)));
+    goodReviews.forEach(r => {
+        const dup = buildCard(r);
+        dup.setAttribute('aria-hidden', 'true');
+        trackEl.appendChild(dup);
+    });
+}
+
+// Make it accessible as a global for the Google Maps script's `callback` param.
+window.initGoogleReviews = initGoogleReviews;
