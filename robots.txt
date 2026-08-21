@@ -1,4 +1,49 @@
 User-agent: *
 Allow: /
 
+# Explicitly allow AI assistant / answer-engine crawlers so estiq's content
+# (services, reviews, FAQ) can be read and cited when people ask AI assistants
+# for beauty salon recommendations in Singapore.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 Sitemap: https://enchanting-shortbread-dd6e11.netlify.app/sitemap.xml

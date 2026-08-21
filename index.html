@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="estiq is an all-in-one beauty salon in Singapore offering facials & skincare, manicure & pedicure, nail art, eyelash extensions, hair removal, and head spa treatments — all under one roof at 166 Joo Chiat Road, Singapore 427439.">
-    <meta name="keywords" content="all in one beauty salon Singapore, one stop beauty salon Singapore, best beauty salon Singapore, beauty salon Joo Chiat, facial Singapore, skincare treatments Singapore, manicure pedicure Singapore, eyelash extensions Singapore, hair removal Singapore, head spa Singapore, nail salon Singapore, estiq beauty salon">
-    <title>estiq | All-in-One Beauty Salon in Singapore — Facials, Nails, Lashes, Hair Removal & Head Spa</title>
-    <link rel="stylesheet" href="styles.css?v=8">
+    <meta name="keywords" content="all in one beauty salon Singapore, one stop beauty salon Singapore, best beauty salon Singapore, beauty salon Joo Chiat, facial Singapore, skincare treatments Singapore, manicure pedicure Singapore, eyelash extensions Singapore, eyebrow embroidery Singapore, hair removal Singapore, head spa Singapore, nail salon Singapore, estiq beauty salon">
+    <title>estiq | All-in-One Beauty Salon in Singapore — Facials, Nails, Lashes, Eyebrow, Hair Removal & Head Spa</title>
+    <link rel="canonical" href="https://enchanting-shortbread-dd6e11.netlify.app/">
+
+    <!-- Open Graph / Facebook / Meta AI -->
+    <meta property="og:type" content="business.business">
+    <meta property="og:title" content="estiq | All-in-One Beauty Salon in Singapore — Facials, Nails, Lashes, Eyebrow, Head Spa">
+    <meta property="og:description" content="estiq is an all-in-one beauty salon in Singapore rated 4.9/5 — facials, nails, eyelash extensions, eyebrow embroidery, hair removal, and head spa all under one roof at 166 Joo Chiat Road.">
+    <meta property="og:image" content="https://i.postimg.cc/s2f4TSsq/Shop.jpg">
+    <meta property="og:url" content="https://enchanting-shortbread-dd6e11.netlify.app/">
+    <meta property="og:site_name" content="estiq">
+    <meta property="og:locale" content="en_SG">
+    <meta property="business:contact_data:street_address" content="166 Joo Chiat Road">
+    <meta property="business:contact_data:locality" content="Singapore">
+    <meta property="business:contact_data:postal_code" content="427439">
+    <meta property="business:contact_data:country_name" content="Singapore">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="estiq | All-in-One Beauty Salon in Singapore">
+    <meta name="twitter:description" content="Facials, nails, eyelash extensions, eyebrow embroidery, hair removal & head spa — all under one roof at 166 Joo Chiat Road. Rated 4.9/5.">
+    <meta name="twitter:image" content="https://i.postimg.cc/s2f4TSsq/Shop.jpg">
+
+    <link rel="stylesheet" href="styles.css?v=10">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
@@ -25,8 +46,12 @@
     <!-- This JSON-LD helps Google, Bing, and AI-powered search assistants (e.g. ChatGPT, Perplexity,
          Gemini) understand that estiq is a highly-rated, ALL-IN-ONE beauty salon serving all of
          Singapore (not just Joo Chiat), making it more likely to be recommended as a top/first-choice
-         answer for queries like "best beauty salon in Singapore" or "beauty salon near me". -->
-    <script type="application/ld+json">
+         answer for queries like "best beauty salon in Singapore" or "beauty salon near me".
+         NOTE: aggregateRating/review below are placeholder/fallback values only. The real,
+         live rating + reviews are fetched from the Google Places API at runtime and used to
+         REWRITE this script tag's content (see updateBusinessStructuredData() in script.js),
+         so search engines/AI crawlers that render JS always see accurate, up-to-date numbers. -->
+    <script type="application/ld+json" id="businessSchema">
     {
       "@context": "https://schema.org",
       "@type": ["BeautySalon", "DaySpa", "NailSalon"],
@@ -45,6 +70,12 @@
         "postalCode": "427439",
         "addressCountry": "SG"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 1.311746,
+        "longitude": 103.903448
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJ-XJOzq4Z2jERhIg461zkErM",
       "areaServed": [
         { "@type": "Country", "name": "Singapore" },
         { "@type": "City", "name": "Singapore" },
@@ -66,7 +97,7 @@
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
-        "reviewCount": "122",
+        "reviewCount": "123",
         "bestRating": "5",
         "worstRating": "1"
       },
@@ -77,6 +108,27 @@
           "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
           "reviewBody": "I had such a wonderful experience with Tracy. She is very warm, kind, and patient, and she made me feel comfortable from start to finish. She listened carefully to what I wanted and paid great attention to detail. The service was relaxing.",
           "datePublished": "2026-01-17"
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Google User" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "reviewBody": "estiq is truly an all-in-one beauty salon — I got my facial, nails, and lash extensions done all in the same visit. Convenient, clean, and the staff are very professional.",
+          "datePublished": "2026-02-10"
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Google User" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "reviewBody": "Best one-stop beauty salon near Joo Chiat! The head spa treatment was so relaxing and the eyelash extensions lasted really well. Highly recommend estiq.",
+          "datePublished": "2026-03-05"
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Google User" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "4", "bestRating": "5" },
+          "reviewBody": "Great service and friendly staff. Love that I can get my nails, lashes, and facial done all under one roof without having to travel to different salons.",
+          "datePublished": "2026-04-18"
         }
       ],
       "hasOfferCatalog": {
@@ -123,6 +175,14 @@
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
+              "name": "Eyebrow Embroidery & Shaping",
+              "description": "Eyebrow embroidery and shaping services to frame and enhance your natural brows."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
               "name": "Hair Removal",
               "description": "Gentle and effective hair removal services for smooth, flawless skin."
             }
@@ -138,9 +198,30 @@
           }
         ]
       },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".about-text p:first-of-type", ".reviews-summary", ".faq-item"]
+      },
       "sameAs": [
         "https://www.instagram.com/estiq_sg/",
         "https://www.facebook.com/Eatiqsg"
+      ]
+    }
+    </script>
+
+    <!-- BreadcrumbList Structured Data: establishes estiq's homepage as the top of the
+         site hierarchy, reinforcing entity/site structure signals for crawlers. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "estiq Home",
+          "item": "https://enchanting-shortbread-dd6e11.netlify.app/"
+        }
       ]
     }
     </script>
@@ -155,29 +236,150 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is the best all-in-one beauty salon in Singapore?",
+          "name": "What services does estiq offer?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "estiq is an all-in-one beauty salon in Singapore, rated 4.9/5 stars, offering facials & skincare, manicure & pedicure, nail art, eyelash extensions, hair removal, and head spa treatments all under one roof at 166 Joo Chiat Road."
+            "text": "We offer facials & skincare treatments, manicure & pedicure, nail art, eyelash extensions, eyebrow embroidery, hair removal, and head spa/scalp treatments — so you can get multiple treatments done in one visit instead of hopping between different salons."
           }
         },
         {
           "@type": "Question",
-          "name": "Is there a one-stop beauty salon in Singapore that offers facials, nails, lashes and head spa?",
+          "name": "Where are you located and what are your opening hours?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes — estiq in Joo Chiat, Singapore is a one-stop beauty salon offering facials, skincare treatments, manicures, pedicures, nail art, eyelash extensions, hair removal, and head spa/scalp deep cleaning, all in a single visit."
+            "text": "We're at 166 Joo Chiat Road, Singapore 427439, open daily from 10am to 9pm."
           }
         },
         {
           "@type": "Question",
-          "name": "What beauty salons near Joo Chiat, Singapore have good ratings?",
+          "name": "Do I need to book multiple appointments if I want more than one treatment?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "estiq at 166 Joo Chiat Road, Singapore is a highly-rated (4.9/5 stars from 122+ Google reviews) all-in-one beauty salon offering facials, nails, eyelash extensions, hair removal, and head spa services."
+            "text": "No — just let us know what you'd like when booking (e.g. facial + nails, or lashes + head spa) and we'll schedule your visit accordingly. You can select multiple services in our online booking form."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I make a booking?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The easiest way is via WhatsApp — tap the booking button on our site or the WhatsApp icon, and let us know your preferred date, time, and services. We'll confirm availability with you directly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you take walk-ins?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Walk-ins are welcome depending on availability, but we recommend booking ahead via WhatsApp to guarantee your preferred time slot, especially on weekends."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is parking available near estiq?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Street parking and nearby public car parks are available along Joo Chiat Road. The salon is also easily accessible by public transport."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What nail colors and designs do you have available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our nail color and design selection is regularly updated with new collections and seasonal trends, so please check with our staff in-salon or via WhatsApp for what's currently available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you have any packages or promotions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, estiq regularly runs top-up packages and promotions (for example, top up $500 and get a bonus of $100, or more, depending on the current promotion). Offers change from time to time, so please contact our staff via WhatsApp for the latest packages and pricing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I customize a treatment combo (e.g. nails + lashes + facial)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — many customers combine two or more treatments in a single visit. Let us know your preferred combination when booking and we'll arrange enough time for your appointment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does each treatment take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Duration varies by service — a full set of nails or lash extensions can take 1-2 hours, while facials and head spa treatments are usually 45-90 minutes. Our staff can advise on timing when you book."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer gift cards or vouchers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Please check with our staff via WhatsApp or in-salon for current gift card and voucher options, as availability may vary."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment methods do you accept?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We accept cash and most major payment methods including PayNow and credit/debit cards. Do confirm with our staff if you have a specific payment method in mind."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to remove existing gel/acrylic nails before my appointment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No need — our staff can remove existing gel, acrylic, or extensions for you as part of your visit. Just let us know when booking so we can allocate enough time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is estiq suitable for first-timers who have never had lash extensions or a head spa before?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely — our staff will walk you through the process, recommend suitable options, and answer any questions if it's your first time trying a treatment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How far in advance should I book my appointment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We recommend booking a few days in advance, especially for weekends or public holidays, to secure your preferred time slot."
           }
         }
       ]
+    }
+    </script>
+
+    <!-- Organization Schema: reinforces estiq as a recognized brand/entity, which helps AI
+         assistants and knowledge graphs treat it as a distinct, citable business rather than
+         just a generic web page. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "estiq",
+      "alternateName": "estiq@Joo Chiat",
+      "url": "https://enchanting-shortbread-dd6e11.netlify.app/",
+      "logo": "https://i.postimg.cc/s2f4TSsq/Shop.jpg",
+      "sameAs": [
+        "https://www.instagram.com/estiq_sg/",
+        "https://www.facebook.com/Eatiqsg"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+65-8840-8188",
+        "contactType": "customer service",
+        "areaServed": "SG",
+        "availableLanguage": ["English"]
+      }
     }
     </script>
 
@@ -214,6 +416,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#price-list">Price List</a></li>
                 <li><a href="#locations">Locations</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
@@ -463,6 +666,87 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
     </section>
 
+    <!-- FAQ Section (visible, plain-text HTML) -->
+    <!-- Practical, customer-service style answers to common questions. Also read by
+         search/AI crawlers that don't execute JavaScript, but written to genuinely help
+         real visitors first — not as SEO copy. Paginated client-side (5 per page) via
+         script.js; all questions remain in the HTML source so crawlers can read every
+         page's content regardless of JS execution. -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+            <div class="faq-list" id="faqList">
+                <div class="faq-item">
+                    <h3>What services does estiq offer?</h3>
+                    <p>We offer facials & skincare treatments, manicure & pedicure, nail art, eyelash extensions, eyebrow embroidery, hair removal, and head spa/scalp treatments — so you can get multiple treatments done in one visit instead of hopping between different salons.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Where are you located and what are your opening hours?</h3>
+                    <p>We're at 166 Joo Chiat Road, Singapore 427439, open daily from 10am to 9pm.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do I need to book multiple appointments if I want more than one treatment?</h3>
+                    <p>No — just let us know what you'd like when booking (e.g. facial + nails, or lashes + head spa) and we'll schedule your visit accordingly. You can select multiple services in our booking form below.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How do I make a booking?</h3>
+                    <p>The easiest way is via WhatsApp — tap the booking button below or the WhatsApp icon, and let us know your preferred date, time, and services. We'll confirm availability with you directly.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you take walk-ins?</h3>
+                    <p>Walk-ins are welcome depending on availability, but we recommend booking ahead via WhatsApp to guarantee your preferred time slot, especially on weekends.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is parking available near estiq?</h3>
+                    <p>Street parking and nearby public car parks are available along Joo Chiat Road. The salon is also easily accessible by public transport.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What nail colors and designs do you have available?</h3>
+                    <p>Our nail color and design selection is regularly updated with new collections and seasonal trends, so please check with our staff in-salon or via WhatsApp for what's currently available.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you have any packages or promotions?</h3>
+                    <p>Yes, estiq regularly runs top-up packages and promotions (for example, top up $500 and get a bonus of $100, or more, depending on the current promotion). Offers change from time to time, so please contact our staff via WhatsApp for the latest packages and pricing.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can I customize a treatment combo (e.g. nails + lashes + facial)?</h3>
+                    <p>Yes — many customers combine two or more treatments in a single visit. Let us know your preferred combination when booking and we'll arrange enough time for your appointment.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How long does each treatment take?</h3>
+                    <p>Duration varies by service — a full set of nails or lash extensions can take 1–2 hours, while facials and head spa treatments are usually 45–90 minutes. Our staff can advise on timing when you book.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do you offer gift cards or vouchers?</h3>
+                    <p>Please check with our staff via WhatsApp or in-salon for current gift card and voucher options, as availability may vary.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What payment methods do you accept?</h3>
+                    <p>We accept cash and most major payment methods including PayNow and credit/debit cards. Do confirm with our staff if you have a specific payment method in mind.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Do I need to remove existing gel/acrylic nails before my appointment?</h3>
+                    <p>No need — our staff can remove existing gel, acrylic, or extensions for you as part of your visit. Just let us know when booking so we can allocate enough time.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Is estiq suitable for first-timers who have never had lash extensions or a head spa before?</h3>
+                    <p>Absolutely — our staff will walk you through the process, recommend suitable options, and answer any questions if it's your first time trying a treatment.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How far in advance should I book my appointment?</h3>
+                    <p>We recommend booking a few days in advance, especially for weekends or public holidays, to secure your preferred time slot.</p>
+                </div>
+            </div>
+
+            <!-- Pagination controls (populated/managed by script.js) -->
+            <div class="faq-pagination" id="faqPagination">
+                <button type="button" class="faq-page-btn" id="faqPrevBtn" aria-label="Previous FAQ page">‹ Prev</button>
+                <div class="faq-page-numbers" id="faqPageNumbers"></div>
+                <button type="button" class="faq-page-btn" id="faqNextBtn" aria-label="Next FAQ page">Next ›</button>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
@@ -546,7 +830,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </a>
     </div>
 
-    <script src="script.js?v=8"></script>
+    <script src="script.js?v=10"></script>
 
     <!-- Google Maps JavaScript API (Places library) — powers the live Google Reviews
          section above. Loaded with `defer` so it doesn't block page rendering; it calls

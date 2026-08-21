@@ -302,6 +302,56 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ---------------------------------------------------------------------------
+// FAQ PAGINATION — shows a maximum of 5 questions per page
+// ---------------------------------------------------------------------------
+// All FAQ items remain in the HTML source (so crawlers/AI bots that don't run JS still
+// see every question), but visually we only show 5 at a time with page controls for a
+// cleaner reading experience.
+document.addEventListener('DOMContentLoaded', () => {
+    const faqList = document.getElementById('faqList');
+    if (!faqList) return;
+
+    const items = Array.from(faqList.querySelectorAll('.faq-item'));
+    const perPage = 5;
+    const totalPages = Math.max(1, Math.ceil(items.length / perPage));
+    let currentPage = 1;
+
+    const prevBtn = document.getElementById('faqPrevBtn');
+    const nextBtn = document.getElementById('faqNextBtn');
+    const pageNumbersEl = document.getElementById('faqPageNumbers');
+
+    function renderPage(page) {
+        currentPage = Math.min(Math.max(page, 1), totalPages);
+
+        items.forEach((item, index) => {
+            const itemPage = Math.floor(index / perPage) + 1;
+            item.classList.toggle('faq-hidden', itemPage !== currentPage);
+        });
+
+        if (prevBtn) prevBtn.disabled = currentPage === 1;
+        if (nextBtn) nextBtn.disabled = currentPage === totalPages;
+
+        if (pageNumbersEl) {
+            pageNumbersEl.innerHTML = '';
+            for (let p = 1; p <= totalPages; p++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'faq-page-number' + (p === currentPage ? ' active' : '');
+                btn.textContent = String(p);
+                btn.setAttribute('aria-label', `Go to FAQ page ${p}`);
+                btn.addEventListener('click', () => renderPage(p));
+                pageNumbersEl.appendChild(btn);
+            }
+        }
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => renderPage(currentPage - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => renderPage(currentPage + 1));
+
+    renderPage(1);
+});
+
+// ---------------------------------------------------------------------------
 // GOOGLE PLACES SETUP — live Google Reviews, no backend required
 // ---------------------------------------------------------------------------
 // This section fetches your REAL, LIVE rating + reviews directly from Google
@@ -380,6 +430,10 @@ function renderGoogleReviews(place) {
         countEl.textContent = `${place.user_ratings_total} reviews`;
     }
 
+    // Keep the JSON-LD structured data (read by Google/Bing/AI crawlers) in sync with the
+    // real, live rating/review data — no more manually-updated/outdated numbers.
+    updateBusinessStructuredData(place);
+
     if (!trackEl) return;
     trackEl.innerHTML = '';
 
@@ -430,3 +484,46 @@ function renderGoogleReviews(place) {
 
 // Make it accessible as a global for the Google Maps script's `callback` param.
 window.initGoogleReviews = initGoogleReviews;
+
+// ---------------------------------------------------------------------------
+// Keep JSON-LD structured data in sync with LIVE Google Places data
+// ---------------------------------------------------------------------------
+// Search engines and AI crawlers that render JavaScript (Googlebot, Bingbot, and most
+// AI assistant crawlers) will see this updated rating/review count. This removes the need
+// to manually edit the hardcoded numbers in index.html every time a new review comes in.
+function updateBusinessStructuredData(place) {
+    const schemaScript = document.getElementById('businessSchema');
+    if (!schemaScript) return;
+
+    let data;
+    try {
+        data = JSON.parse(schemaScript.textContent);
+    } catch (e) {
+        return; // malformed JSON — don't risk breaking the page
+    }
+
+    if (typeof place.rating === 'number') {
+        data.aggregateRating = data.aggregateRating || { '@type': 'AggregateRating', bestRating: '5', worstRating: '1' };
+        data.aggregateRating.ratingValue = place.rating.toFixed(1);
+    }
+    if (typeof place.user_ratings_total === 'number') {
+        data.aggregateRating = data.aggregateRating || { '@type': 'AggregateRating', bestRating: '5', worstRating: '1' };
+        data.aggregateRating.reviewCount = String(place.user_ratings_total);
+    }
+
+    if (Array.isArray(place.reviews) && place.reviews.length > 0) {
+        data.review = place.reviews
+            .filter(r => r.rating >= 4)
+            .map(r => ({
+                '@type': 'Review',
+                author: { '@type': 'Person', name: r.author_name || 'Google User' },
+                reviewRating: { '@type': 'Rating', ratingValue: String(r.rating), bestRating: '5' },
+                reviewBody: r.text || '',
+                datePublished: r.time
+                    ? new Date(r.time * 1000).toISOString().slice(0, 10)
+                    : undefined
+            }));
+    }
+
+    schemaScript.textContent = JSON.stringify(data, null, 2);
+}

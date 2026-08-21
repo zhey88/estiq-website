@@ -10,6 +10,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Structured Data: Service + BreadcrumbList — helps AI/search crawlers understand
+         this page specifically covers facial & skincare treatments, offered by estiq, an
+         all-in-one beauty salon in Singapore. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Facial & Skincare Treatment",
+      "name": "Facial & Skincare Treatments at estiq",
+      "description": "Professional facial treatments to cleanse, rejuvenate and maintain healthy, glowing skin, offered at estiq, an all-in-one beauty salon in Singapore.",
+      "provider": {
+        "@type": "BeautySalon",
+        "name": "estiq",
+        "url": "https://enchanting-shortbread-dd6e11.netlify.app/",
+        "telephone": "+6588408188",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "166 Joo Chiat Road",
+          "addressLocality": "Singapore",
+          "postalCode": "427439",
+          "addressCountry": "SG"
+        }
+      },
+      "areaServed": { "@type": "City", "name": "Singapore" },
+      "url": "https://enchanting-shortbread-dd6e11.netlify.app/facial.html"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "estiq Home",
+          "item": "https://enchanting-shortbread-dd6e11.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Facial & Skincare Treatments",
+          "item": "https://enchanting-shortbread-dd6e11.netlify.app/facial.html"
+        }
+      ]
+    }
+    </script>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17708378003"></script>
@@ -125,7 +173,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div class="service-card">
                     <a href="nail.html">
                         <div class="service-image">
-                            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=600&fit=crop" alt="Nail Services">
+                            <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&h=600&fit=crop" alt="Manicure and pedicure services at estiq Joo Chiat">
                         </div>
                         <h3>Nail Services</h3>
                         <p>Manicure, pedicure, and beautiful nail art</p>
@@ -135,7 +183,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div class="service-card">
                     <a href="lash.html">
                         <div class="service-image">
-                            <img src="https://i.postimg.cc/y65Hy81b/Eyelesh1.jpg" alt="Eyelash Extensions">
+                            <img src="https://i.postimg.cc/y65Hy81b/Eyelesh1.jpg" alt="Eyelash extensions at estiq Joo Chiat">
                         </div>
                         <h3>Eyelash Extensions</h3>
                         <p>Enhance your natural beauty with stunning lashes</p>
@@ -145,7 +193,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <div class="service-card">
                     <a href="scalp.html">
                         <div class="service-image">
-                            <img src="https://i.postimg.cc/htPyhN6y/Headspa1.jpg" alt="Scalp Care">
+                            <img src="https://i.postimg.cc/htPyhN6y/Headspa1.jpg" alt="Head spa and scalp care treatment at estiq Joo Chiat">
                         </div>
                         <h3>Scalp Deep Cleaning</h3>
                         <p>Rejuvenating head spa and scalp treatments</p>
